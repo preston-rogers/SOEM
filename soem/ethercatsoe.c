@@ -46,7 +46,7 @@ PACKED_END
  */
 void ecx_SoEerror(ecx_contextt *context, uint16 Slave, uint16 idn, uint16 Error)
 {
-   printf("ERROR : slave %d pushing so error \n", Slave); 
+   fprintf(stderr, "ERROR : slave %d pushing so error \n", Slave); 
    ec_errort Ec;
 
    memset(&Ec, 0, sizeof(Ec));
@@ -54,7 +54,7 @@ void ecx_SoEerror(ecx_contextt *context, uint16 Slave, uint16 idn, uint16 Error)
    Ec.Slave = Slave;
    Ec.Index = idn;
    Ec.SubIdx = 0;
-   printf("ERROR : ecat error being set to true in ecx_SoEerror \n"); 
+   fprintf(stderr, "ERROR : ecat error being set to true in ecx_SoEerror \n"); 
    *(context->ecaterror) = TRUE;
    Ec.Etype = EC_ERR_TYPE_SOE_ERROR;
    Ec.ErrorCode = Error;

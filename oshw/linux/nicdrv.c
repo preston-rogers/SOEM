@@ -473,7 +473,7 @@ static int ecx_waitinframe_red(ecx_portt *port, uint8 idx, osal_timert *timer)
 
    /* if not in redundant mode then always assume secondary is OK */
    if (port->redstate == ECT_RED_NONE) {
-      printf("We are in redunant mode for frame idx %d!", idx);
+      fprintf(stderr, "We are in redunant mode for frame idx %d!", idx);
       wkc2 = 0;
    }
    do
@@ -489,7 +489,7 @@ static int ecx_waitinframe_red(ecx_portt *port, uint8 idx, osal_timert *timer)
             wkc2 = ecx_inframe(port, idx, 1);
       }
       if (osal_timer_is_expired(&timer)) {
-         printf("Frame timeout reached for first frame for frame idx %d!", idx);
+         fprintf(stderr, "Frame timeout reached for first frame for frame idx %d!", idx);
          break;
       }
    /* wait for both frames to arrive or timeout */
@@ -533,7 +533,7 @@ static int ecx_waitinframe_red(ecx_portt *port, uint8 idx, osal_timert *timer)
             /* retrieve frame */
             wkc2 = ecx_inframe(port, idx, 1);
             if (osal_timer_is_expired(&timer2)) {
-               printf("Frame timeout reached for second frame for frame idx %d!", idx);
+               fprintf(stderr, "Frame timeout reached for second frame for frame idx %d!", idx);
                break;
             }
          } while ((wkc2 <= EC_NOFRAME));
