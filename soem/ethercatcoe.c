@@ -65,6 +65,7 @@ PACKED_END
  */
 void ecx_SDOerror(ecx_contextt *context, uint16 Slave, uint16 Index, uint8 SubIdx, int32 AbortCode)
 {
+   printf("ERROR : slave %d pushing SDO error \n", Slave);  
    ec_errort Ec;
 
    memset(&Ec, 0, sizeof(Ec));
@@ -72,6 +73,7 @@ void ecx_SDOerror(ecx_contextt *context, uint16 Slave, uint16 Index, uint8 SubId
    Ec.Slave = Slave;
    Ec.Index = Index;
    Ec.SubIdx = SubIdx;
+   printf("ERROR : ecat error being set to true in ecx_SDOerror \n"); 
    *(context->ecaterror) = TRUE;
    Ec.Etype = EC_ERR_TYPE_SDO_ERROR;
    Ec.AbortCode = AbortCode;
@@ -88,12 +90,14 @@ void ecx_SDOerror(ecx_contextt *context, uint16 Slave, uint16 Index, uint8 SubId
  */
 static void ecx_SDOinfoerror(ecx_contextt *context, uint16 Slave, uint16 Index, uint8 SubIdx, int32 AbortCode)
 {
+   printf("ERROR : slave %d pushing SDO info error \n", Slave); 
    ec_errort Ec;
 
    memset(&Ec, 0, sizeof(Ec));
    Ec.Slave = Slave;
    Ec.Index = Index;
    Ec.SubIdx = SubIdx;
+   printf("ERROR : ecat error being set to true in ecx_SDOinfoerror \n"); 
    *(context->ecaterror) = TRUE;
    Ec.Etype = EC_ERR_TYPE_SDOINFO_ERROR;
    Ec.AbortCode = AbortCode;

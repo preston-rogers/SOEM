@@ -152,6 +152,7 @@ void ec_free_adapters (ec_adaptert * adapter)
  */
 void ecx_pusherror(ecx_contextt *context, const ec_errort *Ec)
 {
+   printf("ERROR : ecx error is being pushed! \n", Slave); 
    context->elist->Error[context->elist->head] = *Ec;
    context->elist->Error[context->elist->head].Signal = TRUE;
    context->elist->head++;
@@ -168,6 +169,7 @@ void ecx_pusherror(ecx_contextt *context, const ec_errort *Ec)
       context->elist->tail = 0;
    }
    *(context->ecaterror) = TRUE;
+   printf("ERROR : ecat error being set to true in ecx_pusherror \n"); 
 }
 
 /** Pops an error from the list.
@@ -192,6 +194,7 @@ boolean ecx_poperror(ecx_contextt *context, ec_errort *Ec)
    }
    else
    {
+      printf("ERROR : ecaterror set to false in ecx_poperror \n"); 
       *(context->ecaterror) = FALSE;
    }
    return notEmpty;
@@ -217,6 +220,7 @@ boolean ecx_iserror(ecx_contextt *context)
  */
 void ecx_packeterror(ecx_contextt *context, uint16 Slave, uint16 Index, uint8 SubIdx, uint16 ErrorCode)
 {
+   printf("ERROR : slave %d pushing packet error \n", Slave); 
    ec_errort Ec;
 
    memset(&Ec, 0, sizeof(Ec));
@@ -224,6 +228,7 @@ void ecx_packeterror(ecx_contextt *context, uint16 Slave, uint16 Index, uint8 Su
    Ec.Slave = Slave;
    Ec.Index = Index;
    Ec.SubIdx = SubIdx;
+   printf("ERROR : ecat error being set to true in ecx_packeterror \n"); 
    *(context->ecaterror) = TRUE;
    Ec.Etype = EC_ERR_TYPE_PACKET_ERROR;
    Ec.ErrorCode = ErrorCode;
@@ -238,6 +243,7 @@ void ecx_packeterror(ecx_contextt *context, uint16 Slave, uint16 Index, uint8 Su
  */
 static void ecx_mbxerror(ecx_contextt *context, uint16 Slave,uint16 Detail)
 {
+   printf("ERROR : slave %d pushing mbx error \n", Slave); 
    ec_errort Ec;
 
    memset(&Ec, 0, sizeof(Ec));
@@ -263,6 +269,7 @@ static void ecx_mbxerror(ecx_contextt *context, uint16 Slave,uint16 Detail)
 static void ecx_mbxemergencyerror(ecx_contextt *context, uint16 Slave,uint16 ErrorCode,uint16 ErrorReg,
     uint8 b1, uint16 w1, uint16 w2)
 {
+   printf("ERROR : slave %d pushing mbx emergency error \n", Slave); 
    ec_errort Ec;
 
    memset(&Ec, 0, sizeof(Ec));

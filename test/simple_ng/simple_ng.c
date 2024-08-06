@@ -50,6 +50,7 @@ fieldbus_initialize(Fieldbus *fieldbus, char *iface)
     fieldbus->iface = iface;
     fieldbus->group = 0;
     fieldbus->roundtrip_time = 0;
+    printf("ERROR : ecat error being set to false in fieldbus_initialize \n"); 
     fieldbus->ecaterror = FALSE;
 
     /* Initialize the ecx_contextt data structure */
@@ -65,6 +66,7 @@ fieldbus_initialize(Fieldbus *fieldbus, char *iface)
     context->esislave = 0;
     context->elist = &fieldbus->elist;
     context->idxstack = &fieldbus->idxstack;
+    printf("INFO : ecat error set to fieldbus ecaterror \n"); 
     context->ecaterror = &fieldbus->ecaterror;
     context->DCtime = &fieldbus->DCtime;
     context->SMcommtype = fieldbus->SMcommtype;
